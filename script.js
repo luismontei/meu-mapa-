@@ -25,7 +25,7 @@ function pegarlink () {
     var link = "http://api.mapbox.com/geocoding/v5/mapbox.places/"+ getcidade() +".json?access_token=pk.eyJ1IjoibGF1cmluZWEiLCJhIjoiY2sxaHI2M3J2MWk3bjNncW93a2ZneTIyMSJ9.IsCqY34SiFRNoGtHLTnEtQ"
     pegarlink.open('GET', link, true); // o pegarlink.open vai servi para abrir a conexão da função pegarlink 
 console.log(link);
-    pegarlink.onreadystatechange = function(a) {
+    pegarlink.onreadystatechange = function(li) {
         if (this.readyState == 4) {
             result = JSON.parse(this.response);
            
@@ -35,7 +35,7 @@ console.log(link);
                inserirItem(result.features[i].place_name, i, result.features[i].geometry.coordinates[1], result.features[i].geometry.coordinates[0]);
                i++;
                 } while (i < 5);
-             // o for vai ser utilizado para indicar o número de opcoẽs que vai haver no mapa 
+             // o do while vai ser utilizado para indicar o número de opcoẽs que vai haver no mapa 
                 
               
         }
@@ -75,11 +75,11 @@ function inserirItem(item, id, latitude, longetude){ //Inserindo a lista de nome
                                              }).addTo(meumap);
                                                L.marker([latitude, longetude]).addTo(meumap);
                          
-                                               L.circle([latitude, longetude], 100, {
+                                               L.circle([latitude, longetude], 100, { // o l.circule vai ser o circulo que vai ser mostrado no mapa
                                                color: 'red',
                                                fillColor: '#f03',
-                                               fillOpacity: 1
-                                               }).addTo(meumap).bindPopup("Este é o circulo! BIOS");
+                                               fillOpacity: 0.2 // opacidade dp circulo
+                                               }).addTo(meumap).bindPopup("circulo");
 
 }
 
